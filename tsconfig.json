@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "moduleResolution": "node",
+    "jsx": "react-native",
+    "esModuleInterop": true,
+    "module": "esnext",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".", // Establece la raíz del proyecto
+    "paths": {
+      "commons/*": ["src/commons/*"] // Puedes agregar alias si es necesario
+    }
+  },
+  "include": [
+    "src/**/*", // Incluye todos los archivos TS/TSX dentro de la carpeta src
+    "node_modules/@types", // Asegúrate de incluir tipos externos
+    "babel.config.js"
+  ],
+  "exclude": [
+    "node_modules", // Excluye node_modules
+    "node_modules/expo/**"
+  ],
+  "extends": "expo/tsconfig.base"
+}
