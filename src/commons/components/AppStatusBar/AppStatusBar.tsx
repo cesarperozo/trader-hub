@@ -11,7 +11,7 @@ const AppStatusBar = (props: AppStatusBarProps) => {
   return isFocused ? (
     <StatusBar
       barStyle={props.barStyle || 'dark-content'}
-      backgroundColor={'transparent'}
+      backgroundColor={"red"}
       animated
       translucent
       {...props}

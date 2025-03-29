@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import AppGestureHandlerRoot from "commons/components/AppGestureHandlerRoot/AppGestureHandlerRoot";
 import AppNavigation from "commons/components/AppNavigation/AppNavigation";
-import { useAppStartup } from "commons/hooks/useAppStartup";
-export default function App() {
-  
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from '.config/reactQuery/reactQueryConfig';
 
-  useAppStartup();
+
+export default function App() {
   return (
     <AppGestureHandlerRoot>
-      <AppNavigation />
+      <QueryClientProvider client={queryClient}>
+        <AppNavigation />
+      </QueryClientProvider>
     </AppGestureHandlerRoot>
   );
 }
