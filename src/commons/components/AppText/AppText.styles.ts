@@ -63,6 +63,7 @@ export const appTextStyle = StyleSheet.create({
   },
   p3: {
     fontFamily: 'Inter-Regular',
+    fontWeight: '800',
     ...appTextProps(18, 12),
   },
   p3_bold: {

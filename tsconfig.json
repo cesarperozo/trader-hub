@@ -16,7 +16,8 @@
   "include": [
     "src/**/*", // Incluye todos los archivos TS/TSX dentro de la carpeta src
     "node_modules/@types", // Asegúrate de incluir tipos externos
-    "babel.config.js"
+    "babel.config.js",
+    ".config/declarations/**/*"
   ],
   "exclude": [
     "node_modules", // Excluye node_modules

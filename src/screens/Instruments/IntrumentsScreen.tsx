@@ -1,8 +1,12 @@
 import React from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
 import AppText from "commons/components/AppText/AppText";
 import { useGetInstruments } from "src/api/queries/intruments/hooks/useGetInstruments";
 import { AppColors } from "commons/utils/AppColors";
+import AppSafeContainer from "commons/components/AppSafeContainer/AppSafeContainer";
+import InstrumentItem from "./components/InstrumentItem";
+import AppDivider from "commons/components/AppDivider/AppDivider";
+import SearchHeader from "commons/components/SearchModal/SearchModal";
 
 const InstrumentsScreen = () => {
   const { data, isLoading } = useGetInstruments();
@@ -15,10 +19,16 @@ const InstrumentsScreen = () => {
     );
   }
   return (
-    <View>
-      <AppText>List of Instruments</AppText>
-      {/* Aquí puedes agregar más contenido y lógica */}
-    </View>
+    <AppSafeContainer>
+      <SearchHeader />
+      <FlatList
+      data={data}
+      keyExtractor={(item) => String(item.id)}
+      renderItem={({ item }) => <InstrumentItem {...item} />}
+      showsVerticalScrollIndicator={false}
+      ItemSeparatorComponent={AppDivider}
+      />
+    </AppSafeContainer>
   );
 };
 

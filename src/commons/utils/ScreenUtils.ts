@@ -34,6 +34,21 @@ export const appTextProps = Platform.select({
   }),
 });
 
+export const appResponsiveSize = (size: number, based: ResponsiveBased = 'width') => {
+  const newSize = based === 'height' ? size * H_FACTOR : size * W_FACTOR;
+  if (Platform.OS === 'ios') {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  } else {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
+  }
+};
+
+export const SCREEN_PADDING = {
+  horizontal: appResponsiveSize(16),
+  top: appResponsiveSize(24, 'height'),
+  noPaddingTop: { paddingTop: 0 },
+};
+
 export const MAX_FONT_SCALE = 1.1;
 export const IS_FONT_SCALED = PixelRatio.getFontScale() > MAX_FONT_SCALE;
 export const FONT_SCALE = IS_FONT_SCALED

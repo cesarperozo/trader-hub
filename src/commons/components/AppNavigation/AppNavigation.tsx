@@ -5,20 +5,18 @@ import { DefaultTheme } from "@react-navigation/native";
 import TradingFlowNavigator from "commons/navigation/navigators/TradingFlowNavigator";
 import { AppColors } from "commons/utils/AppColors";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import AppStatusBar from "../AppStatusBar/AppStatusBar";
 
 const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: AppColors.black,
+    background: AppColors.white,
   },
 };
 
 const AppNavigation = () => {
   return (
     <NavigationContainer theme={MyTheme}>
-      <AppStatusBar />
       <SafeAreaProvider>
         <TradingFlowNavigator />
       </SafeAreaProvider>

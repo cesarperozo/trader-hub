@@ -13,7 +13,7 @@ const TradingFlowStack = createStackNavigator<TradingFlowStackParamList>()
 
 const TradingFlowNavigator = () => {
   return (
-    <TradingFlowStack.Navigator initialRouteName="Intruments">
+    <TradingFlowStack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Portfolio">
       <TradingFlowStack.Screen name="Portfolio" component={PortfolioScreen} />
       <TradingFlowStack.Screen name="Intruments" component={InstrumentsScreen} />
     </TradingFlowStack.Navigator>
