@@ -1,6 +1,6 @@
 export enum AppColors {
   primary = "#0090FF",
-  secondary = "#32E176",
+  secondary = "#113264",
   tertiary = "#ECFFF3",
   black = "#161616",
   lightBlack = "#242424",
@@ -15,4 +15,6 @@ export enum AppColors {
   errorBackground = "#FFE9E9",
   warning = "#E1980A",
   warningBackground = "#F8F1E4",
+  buyButtonBackground = '#163B1D',
+  sellButtonBackground = '#370E01'
 }

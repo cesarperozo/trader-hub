@@ -4,7 +4,6 @@ import {
   TextInput,
   Modal,
   TouchableOpacity,
-  StyleSheet,
   StatusBar,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -19,14 +18,14 @@ import { useSearch } from "src/api/queries/search/hooks/useSearch";
 import { useDebounce } from "commons/hooks/useDebounce";
 import { styles } from "./SearchModal.styles";
 import SearchResult from "./components/SearchResult";
+import AppSvgImage from "../AppSvgImage/AppSvgImage";
+import { appResponsiveSize } from "commons/utils/ScreenUtils";
 
 const SearchHeader = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
   const text = useDebounce(searchQuery);
-  console.log({ text });
-
   const { data, isLoading, error } = useSearch(text);
 
   const inputWidth = useSharedValue(200);
@@ -74,15 +73,12 @@ const SearchHeader = () => {
   return (
     <>
       <View style={styles.header}>
-        <Ionicons
-          name="logo-react"
-          size={28}
-          color="white"
-          style={styles.logo}
-        />
+      <AppSvgImage width={appResponsiveSize(30)} height={appResponsiveSize(30)} name="logo" style={styles.logo}/>
+
+      
         <TouchableOpacity style={styles.inputContainer} onPress={openSearch}>
           <Animated.View style={[styles.icon, animatedIconStyle]}>
-            <Ionicons name="search" size={14} color="white" />
+            <Ionicons name="search" size={appResponsiveSize(14)} color="white" />
           </Animated.View>
           <TextInput
             style={styles.input}

@@ -1,23 +1,30 @@
-import { createStackNavigator } from '@react-navigation/stack'
-import { Text, View } from 'react-native'
-import InstrumentsScreen from 'src/screens/Instruments/IntrumentsScreen'
-import PortfolioScreen from 'src/screens/Portfolio/PortfolioScreen'
+import { NavigatorScreenParams } from "@react-navigation/native";
+import React from "react";
+import HomeNavigator, { HomeStackParamList } from "./HomeNavigator";
+import {
+  createStackNavigator,
+  StackNavigationProp,
+} from "@react-navigation/stack";
+import { InstrumentTO } from "src/api/models/Instrument/Instrument";
+import InstrumentDetailsScreen from "src/screens/Instruments/InstrumentDetails/InstrumentDetailsScreen";
 
-export type TradingFlowStackParamList = {
-  Intruments: undefined
-  Portfolio: undefined
-}
+export type TradingFlowNavigationProps =
+  StackNavigationProp<TradingFlowNavigatorParams>;
 
-const TradingFlowStack = createStackNavigator<TradingFlowStackParamList>()
+export type TradingFlowNavigatorParams = {
+  HomeStack: NavigatorScreenParams<HomeStackParamList>;
+  InstrumentDetails: {instrument:  InstrumentTO},
+};
 
+export const TradingFlow = createStackNavigator<TradingFlowNavigatorParams>();
 
-const TradingFlowNavigator = () => {
+export const TradingFlowNavigator = () => {
   return (
-    <TradingFlowStack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Portfolio">
-      <TradingFlowStack.Screen name="Portfolio" component={PortfolioScreen} />
-      <TradingFlowStack.Screen name="Intruments" component={InstrumentsScreen} />
-    </TradingFlowStack.Navigator>
-  )
-}
+    <TradingFlow.Navigator initialRouteName="HomeStack"  screenOptions={{ headerShown: false }}>
+      <TradingFlow.Screen name="HomeStack" component={HomeNavigator} />
+      <TradingFlow.Screen name="InstrumentDetails" component={InstrumentDetailsScreen} />
+    </TradingFlow.Navigator>
+  );
+};
 
-export default TradingFlowNavigator
+export default TradingFlowNavigator;

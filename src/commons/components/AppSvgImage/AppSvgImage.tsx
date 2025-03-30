@@ -2,9 +2,12 @@ import { AppColors } from "commons/utils/AppColors";
 import React from "react";
 import { SvgProps } from "react-native-svg";
 import Searching from "../../../assets/svg/searching.svg"
+import Logo from "../../../assets/svg/logo.svg"
+
 
 const SVG_IMAGES = {
   searching: Searching,
+  logo: Logo,
 };
 
 export type SvgImageName = keyof typeof SVG_IMAGES;

@@ -1,18 +1,21 @@
 import React from "react";
 import AppText from "commons/components/AppText/AppText";
 import { AppColors } from "commons/utils/AppColors";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { InstrumentTO } from "src/api/models/Instrument/Instrument";
 import { calculateReturn } from "./utils";
+import { styles } from "./instrumentItem.styles";
+import { useNavigation } from "@react-navigation/native";
+import { TradingFlowNavigationProps } from "commons/navigation/navigators/TradingFlowNavigator";
 
 const InstrumentItem = ({ ...item }: InstrumentTO) => {
+
+  const navigation = useNavigation<TradingFlowNavigationProps>()
+
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        paddingVertical: 16,
-      }}
+    <TouchableOpacity
+      style={styles.itemContainer}
+      onPress={() => navigation.navigate("InstrumentDetails", { instrument: item})}
     >
       <View>
         <AppText bold type="p2" color={AppColors.white}>
@@ -31,7 +34,7 @@ const InstrumentItem = ({ ...item }: InstrumentTO) => {
         </AppText>
         
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

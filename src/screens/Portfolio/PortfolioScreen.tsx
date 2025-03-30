@@ -6,10 +6,14 @@ import { AppColors } from "commons/utils/AppColors";
 import { ActivityIndicator, FlatList, View } from "react-native";
 import { useGetPortfolio } from "src/api/queries/Portfolio/hooks/useGetPortfolio";
 import PortfolioItem from "./components/PortfolioItem";
+import { useBottomSheetStore } from "src/api/stores/useBottomSheetStore";
+import { useEffect } from "react";
 
 const PortfolioScreen = () => {
   const { data, isLoading } = useGetPortfolio();
 
+
+ 
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -18,7 +22,7 @@ const PortfolioScreen = () => {
     );
   }
   return (
-    <AppSafeContainer>
+    <AppSafeContainer safeBottom={false}>
       <SearchHeader />
       <View
         style={{
@@ -39,7 +43,7 @@ const PortfolioScreen = () => {
         </View>
         <View style={{ flex: 1, alignItems: "flex-end" }}>
           <AppText bold type="p3" color={AppColors.mediumGray}>
-            Proceeds
+            L/P
           </AppText>
         </View>
       </View>

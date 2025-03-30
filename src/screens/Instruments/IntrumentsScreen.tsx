@@ -10,23 +10,18 @@ import SearchHeader from "commons/components/SearchModal/SearchModal";
 
 const InstrumentsScreen = () => {
   const { data, isLoading } = useGetInstruments();
+  
 
-  if (isLoading) {
-    return (
-      <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-        <ActivityIndicator color={AppColors.secondary} size={"large"} />
-      </View>
-    );
-  }
+
   return (
-    <AppSafeContainer>
+    <AppSafeContainer safeBottom={false}>
       <SearchHeader />
       <FlatList
-      data={data}
-      keyExtractor={(item) => String(item.id)}
-      renderItem={({ item }) => <InstrumentItem {...item} />}
-      showsVerticalScrollIndicator={false}
-      ItemSeparatorComponent={AppDivider}
+        data={data}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={({ item }) => <InstrumentItem {...item} />}
+        showsVerticalScrollIndicator={false}
+        ItemSeparatorComponent={AppDivider}
       />
     </AppSafeContainer>
   );

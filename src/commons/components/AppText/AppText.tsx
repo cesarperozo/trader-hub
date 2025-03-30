@@ -39,7 +39,7 @@ const AppText = ({
   bold = false,
   disabled = false,
   onPress,
-  color = AppColors.black,
+  color = AppColors.white,
   ...rest
 }: AppTextProps) => {
   // Obtener el estilo de la propiedad 'type'
