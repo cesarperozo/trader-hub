@@ -1,19 +1,14 @@
 import { create } from "zustand";
-import shallow from "zustand/shallow";
 
-
-// Interfaz para las órdenes
-interface Order {
-  id: string;
-  instrument_id: string;
-  price: number;
-  quantity: number;
-  side: string;
-  status: string;
-  type: string;
-}
-
-// Interfaz del estado global
+export interface Order {
+    id: number;
+    instrument_id: number;
+    price: number;
+    quantity: number;
+    side: "BUY" | "SELL";
+    status: "PENDING" | "FILLED" | "CANCELLED" | "REJECTED";
+    type: "MARKET" | "LIMIT";
+  }
 interface OrdersStore {
   ordersByInstrument: Record<string, Order[]>; // Órdenes por instrumento
   addOrder: (instrumentId: string, order: Order) => void; // Añadir orden

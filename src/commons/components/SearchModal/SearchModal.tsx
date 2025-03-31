@@ -82,7 +82,7 @@ const SearchHeader = () => {
           </Animated.View>
           <TextInput
             style={styles.input}
-            placeholder="Buscar..."
+            placeholder="DYKA"
             placeholderTextColor="gray"
             editable={false}
           />
@@ -108,7 +108,7 @@ const SearchHeader = () => {
               <Animated.View style={[styles.animatedInput, animatedInputStyle]}>
                 <TextInput
                   style={styles.modalInput}
-                  placeholder="Buscar..."
+                  placeholder="DYKA"
                   placeholderTextColor="gray"
                   value={searchQuery}
                   onChangeText={(text) => setSearchQuery(text.toUpperCase())}

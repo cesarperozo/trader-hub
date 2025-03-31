@@ -68,14 +68,6 @@ const AppBottomSheet = () => {
     return <></>;
   }
 
-  /*  const getContentByScreen = () => {
-      if (contentType[bottomSheetType]) {
-        return contentType[bottomSheetType];
-      }
-      return <DefaultContent />;
-      
-    }; */
-
   return (
     <BottomSheetModal
       animationConfigs={animationConfigs}

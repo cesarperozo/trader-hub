@@ -18,7 +18,7 @@ const Switch: React.FC<SwitchProps> = ({
   title,
   textError,
 }) => {
-  const [selectedOption, setSelectedOption] = useState<string>();
+  const [selectedOption, setSelectedOption] = useState<string>(options[0]);
 
   const capitalizeFirstLetter = (string: string) => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
