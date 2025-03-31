@@ -6,8 +6,6 @@ import { AppColors } from "commons/utils/AppColors";
 import { ActivityIndicator, FlatList, View } from "react-native";
 import { useGetPortfolio } from "src/api/queries/Portfolio/hooks/useGetPortfolio";
 import PortfolioItem from "./components/PortfolioItem";
-import { useBottomSheetStore } from "src/api/stores/useBottomSheetStore";
-import { useEffect } from "react";
 
 const PortfolioScreen = () => {
   const { data, isLoading } = useGetPortfolio();
@@ -22,7 +20,7 @@ const PortfolioScreen = () => {
     );
   }
   return (
-    <AppSafeContainer safeBottom={false}>
+    <AppSafeContainer safeTop safeBottom={false}>
       <SearchHeader />
       <View
         style={{

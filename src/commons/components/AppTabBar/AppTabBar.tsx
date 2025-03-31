@@ -6,15 +6,18 @@ import AppText from "../AppText/AppText";
 import { NavigationHelpers, ParamListBase, RouteProp } from "@react-navigation/native";
 import { styles } from "./ApptabBar.styles";
 import { AppColors } from "commons/utils/AppColors";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type TabButtonProps = {
     route: RouteProp<ParamListBase, string>;
     options: BottomTabNavigationOptions;
     isFocused: boolean;
     navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
+    bottom: number
   };
 
-const TabButton = ({ route, options, isFocused, navigation }: TabButtonProps) => {
+const TabButton = ({ route, options, isFocused, navigation, bottom }: TabButtonProps) => {
+  
   const onPress = () => {
     if (!isFocused) {
       navigation.navigate(route.name);
@@ -34,7 +37,7 @@ const TabButton = ({ route, options, isFocused, navigation }: TabButtonProps) =>
 
   return (
     <Pressable
-      style={styles.tabButton}
+      style={styles(bottom).tabButton}
       onPress={onPress}
       key={route.key}
       accessibilityRole="button"
@@ -53,13 +56,14 @@ const TabButton = ({ route, options, isFocused, navigation }: TabButtonProps) =>
 
 const CustomTabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, navigation }) => {
   const routes = useMemo(() => state.routes.slice(0, 2), [state.routes]);
+  const { bottom } = useSafeAreaInsets();
 
   return (
-      <View style={styles.tabContainer}>
+      <View style={styles(bottom).tabContainer}>
         {routes.map((route, index) => {
           const { options } = descriptors[route.key];
           const isFocused = state.index === index;
-          return <TabButton key={route.key} route={route} options={options} isFocused={isFocused} navigation={navigation} />;
+          return <TabButton key={route.key} route={route} options={options} isFocused={isFocused} navigation={navigation} bottom={bottom} />;
         })}
       </View>
   );

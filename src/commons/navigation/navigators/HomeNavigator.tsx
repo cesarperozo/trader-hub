@@ -17,6 +17,7 @@ const Tab = createBottomTabNavigator<HomeStackParamList>();
 
 const HomeNavigator = () => {
   return (
+    
     <Tab.Navigator
       tabBar={(props) => <AppTabBar {...props} />}
       initialRouteName="Portfolio"
