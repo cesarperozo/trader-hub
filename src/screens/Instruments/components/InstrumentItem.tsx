@@ -10,12 +10,14 @@ import { TradingFlowNavigationProps } from "commons/navigation/navigators/Tradin
 
 const InstrumentItem = ({ ...item }: InstrumentTO) => {
 
-  const navigation = useNavigation<TradingFlowNavigationProps>()
+  const navigation = useNavigation<TradingFlowNavigationProps>();
 
   return (
     <TouchableOpacity
       style={styles.itemContainer}
-      onPress={() => navigation.navigate("InstrumentDetails", { instrument: item})}
+      onPress={() => {
+        navigation.navigate("InstrumentDetails", { instrument: item });
+      }}
     >
       <View>
         <AppText bold type="p2" color={AppColors.white}>
@@ -26,13 +28,21 @@ const InstrumentItem = ({ ...item }: InstrumentTO) => {
         </AppText>
       </View>
       <View>
-      <AppText align="right" type="p2" color={AppColors.white}>
+        <AppText align="right" type="p2" color={AppColors.white}>
           {`${item.last_price} $`}
         </AppText>
-        <AppText bold align="right" type="p3" color={item.last_price >= item.close_price ? AppColors.success : AppColors.error}>
+        <AppText
+          bold
+          align="right"
+          type="p3"
+          color={
+            item.last_price >= item.close_price
+              ? AppColors.success
+              : AppColors.error
+          }
+        >
           {calculateReturn(item.last_price, item.close_price)}
         </AppText>
-        
       </View>
     </TouchableOpacity>
   );

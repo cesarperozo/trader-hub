@@ -19,8 +19,6 @@ const AppBottomSheet = () => {
 
   const { openBottomSheet, setCloseBottomSheet, bottomSheetType, args} =
     useBottomSheetStore();
-
-    console.log({args})
   
   useEffect(() => {
     setTimeout(() => {

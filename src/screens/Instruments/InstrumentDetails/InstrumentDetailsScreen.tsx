@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import AppText from "commons/components/AppText/AppText";
 import { AppColors } from "commons/utils/AppColors";
 import AppSafeContainer from "commons/components/AppSafeContainer/AppSafeContainer";
@@ -16,6 +16,8 @@ import AppDivider from "commons/components/AppDivider/AppDivider";
 import { styles } from "./InstrumentDetailsScreen.styles";
 import { Ionicons } from "@expo/vector-icons";
 import { useBottomSheetStore } from "src/api/stores/useBottomSheetStore";
+import { useOrdersStore } from "src/api/stores/useOrderStore";
+import shallow, { useShallow } from "zustand/shallow";
 
 type SideType = "SELL" | "BUY" | null;
 
@@ -23,17 +25,24 @@ const InstrumentDetailsScreen = () => {
   const { setOpenBottomSheet } = useBottomSheetStore();
 
   const navigation = useNavigation<TradingFlowNavigationProps>();
+
   const { params } =
     useRoute<RouteProp<TradingFlowNavigatorParams, "InstrumentDetails">>();
   const intrument = params.instrument;
 
 
+  const orders = useOrdersStore(
+    useShallow((state) => state.getOrders(intrument.id.toString()))
+  );
+
+
+  console.log({orders})
 
   const handleSellOrBuy = (side: SideType) => {
     const createOrder = {
       side,
-      instrument_id: intrument.id
-    }
+      instrument_id: intrument.id,
+    };
     setOpenBottomSheet("DEFAULT", { args: createOrder! });
   };
 

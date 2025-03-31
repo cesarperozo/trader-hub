@@ -10,23 +10,27 @@ import AppButton from "commons/components/AppButton/AppButton";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useBottomSheetStore } from "src/api/stores/useBottomSheetStore";
+import { useCreateOrder } from "src/api/queries/orders/hooks/useCreateOrders";
+import { useOrdersStore } from "src/api/stores/useOrderStore";
 
 type FormType = {
-  quantity: number;
+  quantity: string;
   type: string;
-  price: number;
+  price: string;
 };
 type FormValues = FormType;
 
 const initialValues: FormValues = {
-  quantity: 0,
+  quantity: "",
   type: "",
-  price: 0,
+  price: "",
 };
 const OrderFormContent: React.FC = () => {
   const [isSubmitSucces, setIsSubmitSucces] = useState(false);
+  const addOrder = useOrdersStore(state => state.addOrder);
 
-  const { openBottomSheet, setCloseBottomSheet, bottomSheetType, args } =
+  const  createOrder  = useCreateOrder();
+  const { args } =
     useBottomSheetStore();
 
   const { instrument_id, side } = args as {
@@ -66,17 +70,22 @@ const OrderFormContent: React.FC = () => {
     validationSchema: OrderSchema,
     onSubmit: async (orderInfo) => {
       const body = {
-        instrument_id: instrument_id,
+        instrument_id: Number(instrument_id),
         side: side,
         type: orderInfo.type,
-        quantity: orderInfo.quantity,
-        ...(orderInfo.type === "LIMIT" && { price: orderInfo.price }),
+        quantity: Number(orderInfo.quantity),
+        ...(orderInfo.type === "LIMIT" && { price: Number(orderInfo.price) }),
       };
 
-      console.log({ body });
+      createOrder.mutateAsync(body, {
+        onSuccess: (data) => {
+            addOrder(instrument_id, data)
+        }
+      });
+
     },
   });
-
+  
 
   return (
     <View>
